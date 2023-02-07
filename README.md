@@ -1,1 +1,2 @@
-# santri
+# Minimal Requirement 
+  Php 8
