@@ -117,6 +117,38 @@
                       </a>
                     </li>
                 <?php }
+                                if (in_array('tu_akademik', $session['akses'])) { ?>
+                                  <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                      <i class="fa-sharp fa-solid fa-users btn-outline-info "></i>
+                                      <p>
+                                        Data Akademik Siswa
+                                        <i class="right fas fa-angle-left"></i>
+                                      </p>
+                                    </a>
+                                    <ul class="nav nav-treeview" style="display: none;">
+                                      <li class="nav-item">
+                                        <a href="<?= BASEURL ?>sdm/sdm" class="nav-link">
+                                          <i class="far fa-dot-circle nav-icon"></i>
+                                          <p>Data Akun</p>
+                                        </a>
+                                      </li>
+              
+                                      <li class="nav-item">
+                                        <a href="<?= BASEURL ?>sdm/akses" class="nav-link">
+                                          <i class="far fa-dot-circle nav-icon"></i>
+                                          <p>Data Akses</p>
+                                        </a>
+                                      </li>
+              
+                                      <li class="nav-item">
+                                        <a href="<?= BASEURL ?>sdm/detail" class="nav-link">
+                                          <i class="far fa-dot-circle nav-icon"></i>
+                                          <p>Data Pribadi</p>
+                                        </a>
+                                      </li>
+                                  <?php }
+              
             } ?>
 
                   </ul>
