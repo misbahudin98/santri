@@ -244,3 +244,11 @@ $(document).on('change', '[name="kecamatan"]', function (e) {
         },
     );
 });
+
+$(document).ready(function() {
+    if (last) {
+        $("."+last).addClass(" active")
+        $(".menu-"+first).addClass(" menu-open")
+        $(".menu1-"+first).addClass(" active")
+    }
+});

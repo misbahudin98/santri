@@ -84,58 +84,7 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <?php if (!empty($session['akses'])) {
               if (in_array('admin', $session['akses'])) { ?>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fa-sharp fa-solid fa-users btn-outline-info "></i>
-                    <p>
-                      SDM
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview" style="display: none;">
-                    <li class="nav-item">
-                      <a href="<?= BASEURL ?>Tu_akademik/akun" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Data Akun</p>
-                      </a>
-                    </li>
 
-                    <li class="nav-item">
-                      <a href="<?= BASEURL ?>Tu_akademik/primer" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Data Primer</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?= BASEURL ?>Tu_akademik/dokumen" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Data Pemberkasan</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?= BASEURL ?>Tu_akademik/alamat" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Data Alamat</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?= BASEURL ?>Tu_akademik/orang_tua" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Data Orang Tua</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?= BASEURL ?>Tu_akademik/alamat" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Data Alamat</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="<?= BASEURL ?>Tu_akademik/mutasi" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Data Mutasi</p>
-                      </a>
-                    </li>
                 <?php }
             } ?>
 

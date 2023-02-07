@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="<?= BASEURL ?>css/adminlte/adminlte.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="<?= BASEURL ?>css/fa/all.min.css">
   <title><?= $data['judul'] ?></title>
   <?php if (isset($data['table'])) { ?>
     <link rel="stylesheet" href="<?= BASEURL ?>css/datatable-bs4/dataTables.bootstrap4.min.css">
@@ -14,9 +14,11 @@
     <link rel="stylesheet" href="<?= BASEURL ?>css/bs-select/bootstrap-select.min.css">
 
   <?php }
-  $session = $data['session'] ?>
-<link href='<?= BASEURL ?>css/select2/select2.min.css' rel='stylesheet' type='text/css'>
-<link href='<?= BASEURL ?>css/select2/select2.bootstrap.min.css' rel='stylesheet' type='text/css'>
+  $session = $data['session'] ;
+   $url = explode('/',$_GET['url']);
+?>
+  <link href='<?= BASEURL ?>css/select2/select2.min.css' rel='stylesheet' type='text/css'>
+  <link href='<?= BASEURL ?>css/select2/select2.bootstrap.min.css' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="<?= BASEURL ?>css/notyf/notyf.min.css">
   <style>
@@ -77,81 +79,91 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item">
+            <li class="nav-item">
               <a class="nav-link " data-toggle="modal" data-target="#password">
                 <i class=" fa-sharp fa-solid  fa-key btn-outline-info"></i>
                 <p>
                   Ganti Password akun
                 </p>
-  </a>
+              </a>
             </li>
             <?php if (!empty($session['akses'])) {
               if (in_array('admin', $session['akses'])) { ?>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                <li class="nav-item menu-sdm">
+                  <a href="#" class="nav-link menu1-sdm">
                     <i class="fa-sharp fa-solid fa-users btn-outline-info "></i>
                     <p>
                       SDM
                       <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
-                  <ul class="nav nav-treeview" style="display: none;">
+                  <ul class="nav nav-treeview" >
                     <li class="nav-item">
-                      <a href="<?= BASEURL ?>sdm/sdm" class="nav-link">
+                      <a href="<?= BASEURL ?>sdm/sdm" class="nav-link sdm">
                         <i class="far fa-dot-circle nav-icon"></i>
                         <p>Data Akun</p>
                       </a>
                     </li>
 
                     <li class="nav-item">
-                      <a href="<?= BASEURL ?>sdm/akses" class="nav-link">
+                      <a href="<?= BASEURL ?>sdm/akses" class="nav-link akses">
                         <i class="far fa-dot-circle nav-icon"></i>
                         <p>Data Akses</p>
                       </a>
                     </li>
 
                     <li class="nav-item">
-                      <a href="<?= BASEURL ?>sdm/detail" class="nav-link">
+                      <a href="<?= BASEURL ?>sdm/detail" class="nav-link detail">
                         <i class="far fa-dot-circle nav-icon"></i>
                         <p>Data Pribadi</p>
                       </a>
                     </li>
-                <?php }
-                                if (in_array('tu_akademik', $session['akses'])) { ?>
-                                  <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                      <i class="fa-sharp fa-solid fa-users btn-outline-info "></i>
-                                      <p>
-                                        Data Akademik Siswa
-                                        <i class="right fas fa-angle-left"></i>
-                                      </p>
-                                    </a>
-                                    <ul class="nav nav-treeview" style="display: none;">
-                                      <li class="nav-item">
-                                        <a href="<?= BASEURL ?>sdm/sdm" class="nav-link">
-                                          <i class="far fa-dot-circle nav-icon"></i>
-                                          <p>Data Akun</p>
-                                        </a>
-                                      </li>
-              
-                                      <li class="nav-item">
-                                        <a href="<?= BASEURL ?>sdm/akses" class="nav-link">
-                                          <i class="far fa-dot-circle nav-icon"></i>
-                                          <p>Data Akses</p>
-                                        </a>
-                                      </li>
-              
-                                      <li class="nav-item">
-                                        <a href="<?= BASEURL ?>sdm/detail" class="nav-link">
-                                          <i class="far fa-dot-circle nav-icon"></i>
-                                          <p>Data Pribadi</p>
-                                        </a>
-                                      </li>
-                                  <?php }
-              
-            } ?>
+                  <?php }
+                if (in_array('tu_akademik', $session['akses'])) { ?>
+                    <li class="nav-item">
+                      <a href="#" class="nav-link">
+                        <i class="fa-sharp fa-solid fa-users btn-outline-info "></i>
+                        <p>
+                          Data Akademik Siswa
+                          <i class="right fas fa-angle-left"></i>
+                        </p>
+                      </a>
+                      <ul class="nav nav-treeview" >
+                        <li class="nav-item">
+                          <a href="<?= BASEURL ?>Tu_akademik/primer" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Data Primer</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="<?= BASEURL ?>Tu_akademik/dokumen" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Data Pemberkasan</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="<?= BASEURL ?>Tu_akademik/alamat" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Data Alamat</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="<?= BASEURL ?>Tu_akademik/orang_tua" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Data Orang Tua</p>
+                          </a>
+                        </li>
 
-                  </ul>
+                        <li class="nav-item">
+                          <a href="<?= BASEURL ?>Tu_akademik/mutasi" class="nav-link">
+                            <i class="far fa-dot-circle nav-icon"></i>
+                            <p>Data Mutasi</p>
+                          </a>
+                        </li>
+                    <?php }
+                } ?>
+
+                      </ul>
         </nav>
       </div>
       <!-- /.sidebar-menu -->
