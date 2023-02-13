@@ -31,8 +31,8 @@
               <form action="<?= BASEURL ?>home/do_login" method="post">
                 <input type="hidden" name="token" value="">
                 <div class="form-group">
-                  <label class="sr-only">Username</label>
-                  <input type="text" name="username" class="form-control" placeholder="Username" autoComplete='off'>
+                  <label class="sr-only">nry</label>
+                  <input type="text" name="nry" class="form-control" placeholder="nry" autoComplete='off'>
                 </div>
                 <div class="form-group mb-4">
                   <label for="password" class="sr-only">Password</label>

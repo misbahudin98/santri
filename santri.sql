@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2023 at 03:48 AM
+-- Generation Time: Feb 13, 2023 at 07:52 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -251,6 +251,106 @@ CREATE TABLE `ak_wali_kelas` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hm_alamat`
+--
+
+CREATE TABLE `hm_alamat` (
+  `id_santri` bigint(255) NOT NULL,
+  `jalan` varchar(255) NOT NULL,
+  `rt` int(255) NOT NULL,
+  `rw` int(255) NOT NULL,
+  `desa` varchar(255) NOT NULL,
+  `kecamatan` varchar(255) NOT NULL,
+  `kabupaten` varchar(255) NOT NULL,
+  `provinsi` varchar(255) NOT NULL,
+  `kodepos` mediumint(255) NOT NULL,
+  `lintang` varchar(255) NOT NULL,
+  `bujur` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hm_dokumen`
+--
+
+CREATE TABLE `hm_dokumen` (
+  `id_santri` bigint(255) NOT NULL,
+  `foto` int(255) NOT NULL,
+  `skl` int(255) NOT NULL,
+  `ijazah` int(255) NOT NULL,
+  `kk` int(255) NOT NULL,
+  `akte` int(255) NOT NULL,
+  `raport` varchar(255) NOT NULL,
+  `form_pengabdian` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hm_kesehatan`
+--
+
+CREATE TABLE `hm_kesehatan` (
+  `id_siswa` bigint(255) NOT NULL,
+  `gol_darah` varchar(255) NOT NULL,
+  `resuhm_darah` varchar(255) NOT NULL,
+  `bb` int(11) NOT NULL,
+  `tb` int(11) NOT NULL,
+  `lk` int(11) NOT NULL,
+  `penyakit_khusus` varchar(255) NOT NULL,
+  `kebutuhan_khusus` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hm_mutasi`
+--
+
+CREATE TABLE `hm_mutasi` (
+  `id_siswa` bigint(255) NOT NULL,
+  `tujuan` varchar(255) NOT NULL,
+  `alasan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hm_orang_tua`
+--
+
+CREATE TABLE `hm_orang_tua` (
+  `id_siswa` bigint(255) NOT NULL,
+  `ayah` varchar(255) NOT NULL,
+  `tempat_lahir_ayah` varchar(255) NOT NULL,
+  `tanggal_lahir_ayah` date NOT NULL,
+  `pendidikan_ayah` varchar(255) NOT NULL,
+  `pekerjaan_ayah` varchar(255) NOT NULL,
+  `penghasilan_ayah` varchar(255) NOT NULL,
+  `nik_ayah` bigint(255) NOT NULL,
+  `hp_ayah` bigint(255) NOT NULL,
+  `ibu` varchar(255) NOT NULL,
+  `tempat_lahir_ibu` varchar(255) NOT NULL,
+  `tanggal_lahir_ibu` date NOT NULL,
+  `pendidikan_ibu` varchar(255) NOT NULL,
+  `pekerjaan_ibu` varchar(255) NOT NULL,
+  `penghasilan_ibu` varchar(255) NOT NULL,
+  `nik_ibu` varchar(255) NOT NULL,
+  `hp_ibu` varchar(255) NOT NULL,
+  `wali` varchar(255) NOT NULL,
+  `tempat_lahir_wali` varchar(255) NOT NULL,
+  `tanggal_lahir_wali` date NOT NULL,
+  `pendidikan_wali` varchar(255) NOT NULL,
+  `pekerjaan_wali` varchar(255) NOT NULL,
+  `penghasilan_wali` varchar(255) NOT NULL,
+  `nik_wali` bigint(255) NOT NULL,
+  `hp_wali` bigint(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hm_pendaftaran`
 --
 
@@ -268,6 +368,33 @@ CREATE TABLE `hm_pendaftaran` (
   `gelombang` varchar(255) NOT NULL,
   `status_daftar_ulang` enum('belum','sudah') NOT NULL DEFAULT 'belum'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hm_primer`
+--
+
+CREATE TABLE `hm_primer` (
+  `id` bigint(255) NOT NULL,
+  `nis` bigint(255) NOT NULL,
+  `nisn` bigint(255) NOT NULL,
+  `nik` bigint(255) NOT NULL,
+  `va` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `jenihm_kelamin` enum('P','L') NOT NULL DEFAULT 'P',
+  `tempat_lahir` varchar(255) NOT NULL,
+  `tanggal_lahir` date NOT NULL,
+  `anak_ke` int(255) NOT NULL,
+  `jumlah_saudara` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hm_primer`
+--
+
+INSERT INTO `hm_primer` (`id`, `nis`, `nisn`, `nik`, `va`, `nama`, `jenihm_kelamin`, `tempat_lahir`, `tanggal_lahir`, `anak_ke`, `jumlah_saudara`) VALUES
+(1, 1, 1, 1, '1', 'mao', 'L', 'malang', '1998-04-10', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -90565,7 +90692,6 @@ INSERT INTO `ind_provinsi` (`id_prov`, `nama`) VALUES
 
 CREATE TABLE `sdm` (
   `id_user` bigint(255) NOT NULL,
-  `nry` varchar(255) NOT NULL,
   `nama` varchar(255) DEFAULT NULL,
   `tgl_lahir` date DEFAULT NULL,
   `nik` bigint(255) DEFAULT NULL,
@@ -90578,18 +90704,20 @@ CREATE TABLE `sdm` (
   `provinsi` varchar(255) DEFAULT NULL,
   `kontak` bigint(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `kd_sekolah` bigint(255) DEFAULT NULL,
-  `kd_kampus` bigint(255) DEFAULT NULL
+  `kd_sekolah` bigint(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sdm`
 --
 
-INSERT INTO `sdm` (`id_user`, `nry`, `nama`, `tgl_lahir`, `nik`, `jalan`, `rt`, `rw`, `desa`, `kecamatan`, `kota_kabupaten`, `provinsi`, `kontak`, `email`, `kd_sekolah`, `kd_kampus`) VALUES
-(0, '', 'admin', '2022-10-19', 2, '2', 2, 2, '2', '2', '2', '2', 2, '2', NULL, 3),
-(2, '', '2', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3),
-(3, '', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sdm` (`id_user`, `nama`, `tgl_lahir`, `nik`, `jalan`, `rt`, `rw`, `desa`, `kecamatan`, `kota_kabupaten`, `provinsi`, `kontak`, `email`, `kd_sekolah`) VALUES
+(0, 'admin', '2022-10-19', 2, '2', 2, 2, '2', '2', '2', '2', 2, '2', NULL),
+(2, '2', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'eko', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, '211410', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'minuq', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -90721,8 +90849,8 @@ CREATE TABLE `s_orang_tua` (
 
 CREATE TABLE `s_pendidikan` (
   `kd` bigint(255) NOT NULL,
-  `kd_rombel` bigint(255) NOT NULL,
   `id_siswa` bigint(255) NOT NULL,
+  `kd_rombel` bigint(255) NOT NULL,
   `kd_mapel` bigint(255) NOT NULL,
   `tapel` varchar(255) NOT NULL,
   `waktu_mulai` datetime NOT NULL,
@@ -90781,7 +90909,7 @@ INSERT INTO `s_primer` (`id`, `nis`, `nisn`, `nik`, `va`, `nama`, `jenis_kelamin
 
 CREATE TABLE `user` (
   `id` bigint(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
+  `nry` varchar(255) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `status_akun` enum('0','1') NOT NULL DEFAULT '0',
   `session` varchar(255) NOT NULL,
@@ -90793,10 +90921,13 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `status_akun`, `session`, `ip_address`, `last_access`) VALUES
-(0, '1', '$2y$10$SOX65kMmCRkQOQlmMyNZTuQNXwcmcL1j0/wXVFwc1h0TDVNJ4CMFG', '1', '$2y$10$qCQy2jVuwRN8OKe/GrrdOO.JUVRjGY1tyWmU7qCVzTHTf59VhdpAu', '::1', '2023-02-07 09:34:25'),
-(2, '2', '$2y$10$dZeugI6IRUfXk7toHHLgYOF3zxb6D6FSwHXIyBWFSN2hK0fehUGIG', '1', '$2y$10$mVV3kQ16P9pTaZKCyg5Za.dr2KtAhs8hxKVnByKeMZHiUOZDBIT46', '::1', '2023-02-03 16:19:09'),
-(3, '3', '$2y$10$K6HhTmpKPYv7ot3JUxN7xOsjS9U7MKuOnLZGE0yo7yfqycXfL4.AK', '1', '', '', '2023-01-05 10:35:33');
+INSERT INTO `user` (`id`, `nry`, `password`, `status_akun`, `session`, `ip_address`, `last_access`) VALUES
+(0, '1', '$2y$10$SOX65kMmCRkQOQlmMyNZTuQNXwcmcL1j0/wXVFwc1h0TDVNJ4CMFG', '1', '$2y$10$BTjqIzpmStI58l3O.51o1OP10fwXM.fzJgIocV12P5Qlai6TnaU4K', '::1', '2023-02-10 08:47:19'),
+(2, '2', '$2y$10$dZeugI6IRUfXk7toHHLgYOF3zxb6D6FSwHXIyBWFSN2hK0fehUGIG', '1', '$2y$10$OwelVSvGyAfkLCaDf3VbLOav51Xon9aGALzfeyyL3bxcvQgEJ2owK', '::1', '2023-02-10 08:52:59'),
+(3, '3', '$2y$10$K6HhTmpKPYv7ot3JUxN7xOsjS9U7MKuOnLZGE0yo7yfqycXfL4.AK', '1', '', '', '2023-01-05 10:35:33'),
+(4, 'eko', '$2y$10$6z8tEBiCqUQFDxC5w9i/weFXO.BhaYqegb.WBQ2r7tTBN36qQJVm2', '1', '', '', '2023-02-09 16:22:09'),
+(5, '211410', '$2y$10$Lh8WAymQpdiMDyxuOA6gL.SOydyjzdn5TrL3PTMgXL5je4ODb1PrG', '1', '', '', '2023-02-09 16:45:59'),
+(6, '2211', '$2y$10$/ss4UgFQdbDHzt02b1bopuOuU4I3MTRGwW0K70ENAOATl6tCIN5xS', '1', '', '', '2023-02-09 16:56:31');
 
 --
 -- Indexes for dumped tables
@@ -90858,10 +90989,47 @@ ALTER TABLE `ak_wali_kelas`
   ADD KEY `id_kelas` (`id_rombel`);
 
 --
+-- Indexes for table `hm_alamat`
+--
+ALTER TABLE `hm_alamat`
+  ADD PRIMARY KEY (`id_santri`);
+
+--
+-- Indexes for table `hm_dokumen`
+--
+ALTER TABLE `hm_dokumen`
+  ADD PRIMARY KEY (`id_santri`);
+
+--
+-- Indexes for table `hm_kesehatan`
+--
+ALTER TABLE `hm_kesehatan`
+  ADD KEY `id_siswa` (`id_siswa`);
+
+--
+-- Indexes for table `hm_mutasi`
+--
+ALTER TABLE `hm_mutasi`
+  ADD PRIMARY KEY (`id_siswa`);
+
+--
+-- Indexes for table `hm_orang_tua`
+--
+ALTER TABLE `hm_orang_tua`
+  ADD PRIMARY KEY (`id_siswa`);
+
+--
 -- Indexes for table `hm_pendaftaran`
 --
 ALTER TABLE `hm_pendaftaran`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `hm_primer`
+--
+ALTER TABLE `hm_primer`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nisn` (`nisn`);
 
 --
 -- Indexes for table `ind_desa`
@@ -90894,7 +91062,6 @@ ALTER TABLE `ind_provinsi`
 ALTER TABLE `sdm`
   ADD PRIMARY KEY (`id_user`),
   ADD UNIQUE KEY `id_user` (`id_user`),
-  ADD KEY `kd_kampus` (`kd_kampus`),
   ADD KEY `kd_sekolah` (`kd_sekolah`);
 
 --
@@ -90960,7 +91127,7 @@ ALTER TABLE `s_primer`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD UNIQUE KEY `username` (`nry`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -91036,7 +91203,7 @@ ALTER TABLE `s_pengabdian`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -91081,6 +91248,36 @@ ALTER TABLE `ak_wali_kelas`
   ADD CONSTRAINT `ak_wali_kelas_ibfk_1` FOREIGN KEY (`id_rombel`) REFERENCES `ak_rombel` (`kd`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `hm_alamat`
+--
+ALTER TABLE `hm_alamat`
+  ADD CONSTRAINT `hm_alamat_ibfk_1` FOREIGN KEY (`id_santri`) REFERENCES `hm_primer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `hm_dokumen`
+--
+ALTER TABLE `hm_dokumen`
+  ADD CONSTRAINT `hm_dokumen_ibfk_1` FOREIGN KEY (`id_santri`) REFERENCES `hm_primer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `hm_kesehatan`
+--
+ALTER TABLE `hm_kesehatan`
+  ADD CONSTRAINT `hm_kesehatan_ibfk_1` FOREIGN KEY (`id_siswa`) REFERENCES `hm_primer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `hm_mutasi`
+--
+ALTER TABLE `hm_mutasi`
+  ADD CONSTRAINT `hm_mutasi_ibfk_1` FOREIGN KEY (`id_siswa`) REFERENCES `hm_primer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `hm_orang_tua`
+--
+ALTER TABLE `hm_orang_tua`
+  ADD CONSTRAINT `hm_orang_tua_ibfk_1` FOREIGN KEY (`id_siswa`) REFERENCES `hm_primer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `ind_kabupaten`
 --
 ALTER TABLE `ind_kabupaten`
@@ -91091,7 +91288,6 @@ ALTER TABLE `ind_kabupaten`
 --
 ALTER TABLE `sdm`
   ADD CONSTRAINT `sdm_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `sdm_ibfk_2` FOREIGN KEY (`kd_kampus`) REFERENCES `ak_kampus` (`kd`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `sdm_ibfk_3` FOREIGN KEY (`kd_sekolah`) REFERENCES `ak_sekolah` (`kd`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

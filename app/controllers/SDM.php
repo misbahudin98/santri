@@ -25,7 +25,6 @@ class SDM extends Controller
         if (!empty($pesan) && !empty($tipe)) {
 
             $data['pesan'] = flasher::setFlash($pesan, $tipe);
-        
         }
 
         $data['subdomain'] = $this->subdomain;
@@ -51,21 +50,20 @@ class SDM extends Controller
                 array_push($a, $b);
             }
             $data['data'] = json_encode($a);
-
         }
 
-        $username = $this->model('User_model')->username();
+        $nry = $this->model('User_model')->nry();
 
-        $output = flasher::input("", 'username', 'select', "", "required", "", $username);
+        $output = flasher::input("", 'nry', 'select', "", "required", "", $nry);
         $output .= flasher::input("", 'akses', "select", "required", "", "", ['SDM' => 'sdm', 'Logistik' => 'logistik', 'Konten' => 'konten', 'Marketing' => 'marketing', 'Customer Service' => 'cs', 'Penjualan' => 'penjualan', 'Keuangan' => 'keuangan', 'Pendapatan' => 'pendapatan']);
         $data['output']  = $output;
 
-        $data['column'] = "[{title:'Aksi'},  {title:'username'},{title:'akses'},{title:'Terakhir diupdate'},{title:'Status Akses'}]";
+        $data['column'] = "[{title:'Aksi'},  {title:'nry'},{title:'akses'},{title:'Terakhir diupdate'},{title:'Status Akses'}]";
         $data['edit'] = 'edit_akses';
         $data['update'] = 'update_akses';
 
 
-        
+
         $data['tambah'] = 'tambah_akses';
 
         $this->view('templates/header', $data);
@@ -113,12 +111,13 @@ class SDM extends Controller
         }
 
 
-        $data['column'] = "[{title:'Aksi'},  {title:'username'},{title:'Status'},{title:'Terakhir Diakses'},{title:'IP'}]";
+        $data['column'] = "[{title:'Aksi'},  {title:'nry'},{title:'Status'},{title:'Terakhir Diakses'},{title:'IP'}]";
         $data['edit'] = 'edit';
         $data['update'] = 'update';
         $data['tambah'] = 'tambah';
-        $data['output'] = flasher::input("", 'username');
-        
+        $data['output'] = flasher::input("", 'nry');
+        $data['output'] .= flasher::input("", 'nama');
+
 
         $this->view('templates/header', $data);
         $this->view('templates/crud', $data);
@@ -138,8 +137,9 @@ class SDM extends Controller
         }
         $data['subdomain'] = $this->subdomain;
         $user = $this->model('User_model')->detail();
+        // var_dump($user) or die;
         if (empty($user)) {
-            $data['data'] = '[["","","","","","","","","","","","",""]]';
+            $data['data'] = '[["","","","","","","","","","","","","","",""]]';
         } else {
             $a = [];
             foreach ($user as $key) {
@@ -159,33 +159,18 @@ class SDM extends Controller
         }
 
 
-        $data['column'] = "[{title:'Aksi'},  {title:'username'},{title:'nama'},
+        $data['column'] = "[{title:'Aksi'},  {title:'Kampus'},  {title:'Sekolah'}
+        ,  {title:'nry'},{title:'nama'},
         {title:'tgl_lahir'},{title:'nik'},{title:'jalan'},{title:'rt'},{title:'rw'},
         {title:'desa'},{title:'kecamatan'},{title:'kota_kabupaten'},{title:'provinsi'},
         {title:'kontak'},{title:'email'}]";
         $data['edit'] = 'edit_detail';
         $data['update'] = 'update_detail';
-        $data['tambah'] = 'tambah_detail';
-        
-        $username = $this->model('User_model')->username();
+
+        $nry = $this->model('User_model')->nry();
         $provinsi = $this->model("Alamat_model")->provinsi();
-
-        $output = flasher::input("", 'user', 'select', "", "required", "", $username);
-        $output .= flasher::input("", 'nama');
-        $output .= flasher::input("", 'tgl_lahir','date');
-        $output .= flasher::input("", 'nik','number');
-        $output .= flasher::input("", 'provinsi', 'select', "", "required", "", $provinsi,"",'provinsi');
-        $output .= flasher::input("", 'kabupaten', 'select', "", "required", "");
-        $output .= flasher::input("", 'kecamatan', 'select', "", "required", "");
-        $output .= flasher::input("", 'desa', 'select', "", "required", "");
-        $output .= flasher::input("", 'jalan');
-        $output .= flasher::input("", 'rt','number');
-        $output .= flasher::input("", 'rw','number');
-        $output .= flasher::input("", 'kontak','number');
-        $output .= flasher::input("", 'email',"email");
-
-        $data['output'] = $output;
         
+
         $this->view('templates/header', $data);
         $this->view('templates/crud', $data);
         $this->view('templates/footer', $data);
@@ -200,7 +185,6 @@ class SDM extends Controller
             header("Location:" . BASEURL . "sdm/sdm/Gagal-menambah-data!/error");
             exit();
         }
-
     }
 
     public function tambah_akses()
@@ -232,8 +216,11 @@ class SDM extends Controller
         $user = $this->model('User_model')->get_single($id);
         $output = flasher::input($user['id'], 'user', "text", "hidden");
 
-        $output .= flasher::input($user['username'], 'username', 'text');
-        $output .= flasher::input($user['status_akun'], 'status', "select", "required", "", "", ['Aktif' => 1, 'Nonaktif' => 0]);
+        $output .= flasher::input($user['nry'], 'nry', 'text');
+        if($user['id'] != '0'){
+            $output .= flasher::input($user['status_akun'], 'status', "select", "required", "", "", ['Aktif' => 1, 'Nonaktif' => 0]);
+
+        }
         $output .= flasher::input("reset", 'reset_password', "checkbox", "", "");
 
         echo $output;
@@ -242,10 +229,10 @@ class SDM extends Controller
     {
         $id = Security::xss_input($_POST['id']);
         $user = $this->model('User_model')->get_single1($id);
-        $username = $this->model('User_model')->username();
+        $nry = $this->model('User_model')->nry();
 
         $output = flasher::input($user['id'], 'user', "text", "hidden");
-        $output .= flasher::input($user['id_user'], 'username', 'select', "", "required", "", $username);
+        $output .= flasher::input($user['id_user'], 'nry', 'select', "", "required", "", $nry);
         $output .= flasher::input($user['akses'], 'akses', "select", "required", "", "", ['SDM' => 'sdm', 'Logistik' => 'logistik', 'Konten' => 'konten', 'Marketing' => 'marketing', 'Customer Service' => 'cs', 'Penjualan' => 'penjualan', 'Keuangan' => 'keuangan', 'Pendapatan' => 'pendapatan']);
         $output .= flasher::input($user['status_akses'], 'status', "select", "required", "", "", ['Aktif' => 1, 'Nonaktif' => 0]);
 
@@ -257,21 +244,27 @@ class SDM extends Controller
         $id = Security::xss_input($_POST['id']);
         $user = $this->model('User_model')->get_single2($id);
         $provinsi = $this->model("Alamat_model")->provinsi();
+        $kampus = $this->model("User_model")->kampus();
+        $sekolah = $this->model("User_model")->sekolah();
+        // var_dump($sekolah ) or die;
 
         // var_dump($user) or die;
         $output = flasher::input($user['id_user'], 'user', "text", "hidden");
+        $output .= flasher::input($user['kd_kampus'], 'kampus', 'select', "", "required", "", $kampus, "");
+        $output .= flasher::input($user['kd_sekolah'], 'sekolah', 'select', "", "required", "", $sekolah, "");
+        
         $output .= flasher::input($user['nama'], 'nama');
-        $output .= flasher::input($user['tgl_lahir'], 'tgl_lahir','date');
-        $output .= flasher::input($user['nik'], 'nik','number');
-        $output .= flasher::input($user['provinsi'], 'provinsi', 'select', "", "required", "", $provinsi,"",'provinsi');
+        $output .= flasher::input($user['tgl_lahir'], 'tgl_lahir', 'date');
+        $output .= flasher::input($user['nik'], 'nik', 'number');
+        $output .= flasher::input($user['provinsi'], 'provinsi', 'select', "", "required", "", $provinsi, "", 'provinsi');
         $output .= flasher::input($user['kota_kabupaten'], 'kabupaten', 'select', "", "required", "");
         $output .= flasher::input($user['kecamatan'], 'kecamatan', 'select', "", "required", "");
         $output .= flasher::input($user['desa'], 'desa', 'select', "", "required", "");
         $output .= flasher::input($user['jalan'], 'jalan');
-        $output .= flasher::input($user['rt'], 'rt','number');
-        $output .= flasher::input($user['rw'], 'rw','number');
+        $output .= flasher::input($user['rt'], 'rt', 'number');
+        $output .= flasher::input($user['rw'], 'rw', 'number');
 
-        $output .= flasher::input($user['kontak'], 'kontak','number');
+        $output .= flasher::input($user['kontak'], 'kontak', 'number');
         $output .= flasher::input($user['email'], 'email');
 
 
