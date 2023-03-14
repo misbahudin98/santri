@@ -7,21 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="<?= BASEURL ?>css/adminlte/adminlte.min.css">
   <link rel="stylesheet" href="<?= BASEURL ?>css/fa/all.min.css">
-  <title><?= $data['judul']?></title>
+  <title><?= $data['judul'] ?></title>
   <?php if (isset($data['table'])) { ?>
     <link rel="stylesheet" href="<?= BASEURL ?>css/datatable-bs4/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?= BASEURL ?>css/datatable-buttons/buttons.bootstrap4.min.css">
-    <link rel="stylesheet" href="<?= BASEURL ?>css/bs-select/bootstrap-select.min.css">
 
   <?php }
-  $session = $data['session'] ;
-   $url = explode('/',$_GET['url']);
-?>
-  <link href='<?= BASEURL ?>css/select2/select2.min.css' rel='stylesheet' type='text/css'>
-  <link href='<?= BASEURL ?>css/select2/select2.bootstrap.min.css' rel='stylesheet' type='text/css'>
 
+  $session = $data['session'];
+  $url = explode('/', $_GET['url']);
+  ?>
+
+  <link rel="stylesheet" href="<?= BASEURL ?>css/bs-select/bootstrap-select.min.css">
   <link rel="stylesheet" href="<?= BASEURL ?>css/notyf/notyf.min.css">
-  <style>
+
+<style>
     .input-group-text {
       width: 33%;
       font-size: xx-small;
@@ -29,7 +29,6 @@
       color: white;
 
     }
-
 
     .form-control {
       border: 2px solid grey;
@@ -94,7 +93,7 @@
                       <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
-                  <ul class="nav nav-treeview" >
+                  <ul class="nav nav-treeview">
                     <li class="nav-item">
                       <a href="<?= BASEURL ?>sdm/sdm" class="nav-link sdm">
                         <i class="far fa-dot-circle nav-icon"></i>
@@ -125,32 +124,13 @@
                           <i class="right fas fa-angle-left"></i>
                         </p>
                       </a>
-                      <ul class="nav nav-treeview" >
+                      <ul class="nav nav-treeview">
                         <li class="nav-item">
                           <a href="<?= BASEURL ?>tu_akademik/primer" class="nav-link primer">
                             <i class="far fa-dot-circle nav-icon"></i>
                             <p>Data Primer</p>
                           </a>
                         </li>
-                        <li class="nav-item">
-                          <a href="<?= BASEURL ?>Tu_akademik/dokumen" class="nav-link dokumen">
-                            <i class="far fa-dot-circle nav-icon"></i>
-                            <p>Data Pemberkasan</p>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a href="<?= BASEURL ?>Tu_akademik/alamat" class="nav-link alamat">
-                            <i class="far fa-dot-circle nav-icon"></i>
-                            <p>Data Alamat</p>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a href="<?= BASEURL ?>Tu_akademik/orang_tua" class="nav-link orang_tua">
-                            <i class="far fa-dot-circle nav-icon"></i>
-                            <p>Data Orang Tua</p>
-                          </a>
-                        </li>
-
                         <li class="nav-item">
                           <a href="<?= BASEURL ?>Tu_akademik/mutasi" class="nav-link mutasi">
                             <i class="far fa-dot-circle nav-icon"></i>
@@ -160,7 +140,7 @@
                     <?php }
                 } ?>
 
-                      </ul>
+            </ul>
         </nav>
       </div>
       <!-- /.sidebar-menu -->
@@ -179,7 +159,7 @@
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="<?=   BASEURL.$data['subdomain'] ?>"><?= str_replace("_"," ",ucfirst($data['subdomain'])) ?></a></li>
+                <li class="breadcrumb-item"><a href="<?= BASEURL . $data['subdomain'] ?>"><?= str_replace("_", " ", ucfirst($data['subdomain'])) ?></a></li>
                 <li class="breadcrumb-item active"><?= $data['judul'] ?></li>
               </ol>
             </div>

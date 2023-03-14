@@ -18,5 +18,4 @@ class Akademik_model
     }
 
 
-
 }

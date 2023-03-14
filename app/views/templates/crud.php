@@ -13,6 +13,7 @@
                     <!-- </div> -->
                     <!-- /.card-header -->
                     <div class="card-body">
+                    <!-- Button trigger modal -->
 
                         <table id="example" class="table table-sm table-suceess table-hover table-striped table-bordered " style="width:100%"></table>
 

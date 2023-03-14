@@ -472,14 +472,16 @@
             $rw = Security::xss_input($_POST['rw']);
             $desa = Security::xss_input($_POST['desa']);
             $kecamatan = Security::xss_input($_POST['kecamatan']);
-            $kota_kabupaten = Security::xss_input($_POST['kota_kabupaten']);
+            $kota_kabupaten = Security::xss_input($_POST['kabupaten']);
             $provinsi = Security::xss_input($_POST['provinsi']);
             $kontak = Security::xss_input($_POST['kontak']);
             $email = Security::xss_input($_POST['email']);
+            $sekolah = Security::xss_input($_POST['sekolah']);
 
 
             $query = "update $this->table2 set        
             nama = :nama,
+            kd_sekolah = :sekolah,
             tgl_lahir =  :tgl_lahir,
             nik = :nik,
             jalan = :jalan,
@@ -495,6 +497,7 @@
             ";
             $this->db->query($query);
             $this->db->bind('id', $id);
+            $this->db->bind('sekolah', $sekolah);
             $this->db->bind('email', $email);
             $this->db->bind('kontak', $kontak);
             $this->db->bind('provinsi', $provinsi);

@@ -243,23 +243,30 @@ class SDM extends Controller
     {
         $id = Security::xss_input($_POST['id']);
         $user = $this->model('User_model')->get_single2($id);
-        $provinsi = $this->model("Alamat_model")->provinsi();
-        $kampus = $this->model("User_model")->kampus();
+        $data = $this->model("Alamat_model")->edit($user['provinsi']);
+
+
+
+
         $sekolah = $this->model("User_model")->sekolah();
         // var_dump($sekolah ) or die;
 
         // var_dump($user) or die;
         $output = flasher::input($user['id_user'], 'user', "text", "hidden");
-        $output .= flasher::input($user['kd_kampus'], 'kampus', 'select', "", "required", "", $kampus, "");
         $output .= flasher::input($user['kd_sekolah'], 'sekolah', 'select', "", "required", "", $sekolah, "");
         
         $output .= flasher::input($user['nama'], 'nama');
         $output .= flasher::input($user['tgl_lahir'], 'tgl_lahir', 'date');
         $output .= flasher::input($user['nik'], 'nik', 'number');
-        $output .= flasher::input($user['provinsi'], 'provinsi', 'select', "", "required", "", $provinsi, "", 'provinsi');
-        $output .= flasher::input($user['kota_kabupaten'], 'kabupaten', 'select', "", "required", "");
-        $output .= flasher::input($user['kecamatan'], 'kecamatan', 'select', "", "required", "");
-        $output .= flasher::input($user['desa'], 'desa', 'select', "", "required", "");
+
+        $output .= flasher::input($user['provinsi'], 'provinsi', 'select', "", "required", "", $data['prov']);
+        $output .= flasher::input($user['kota_kabupaten'], 'kabupaten', 'select', "", "required", "",$data['kab']);
+
+        $output .= flasher::input($user['kecamatan'], 'kecamatan', 'select', "", "required", "",$data['kec']);
+
+        $output .= flasher::input($user['desa'], 'desa', 'select', "", "required", "", $data['desa']);
+        // var_dump("sa") or die;
+
         $output .= flasher::input($user['jalan'], 'jalan');
         $output .= flasher::input($user['rt'], 'rt', 'number');
         $output .= flasher::input($user['rw'], 'rw', 'number');
@@ -298,6 +305,7 @@ class SDM extends Controller
 
     public function update_detail()
     {
+        // var_dump($_POST) or die; 
         if ($this->model('User_model')->update_detail() > 0) {
             header("Location:" . BASEURL . "sdm/detail/berhasil-mengubah-data!/success");
             exit();

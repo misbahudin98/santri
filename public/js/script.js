@@ -32,7 +32,7 @@ if (tambah) {
 $('.btn-warning').click(function () {
 
 
-    const id = $(this).data('id');
+     id = $(this).data('id');
     $.ajax({
         type: "post",
         url: domain + subdomain + edit,
@@ -40,69 +40,26 @@ $('.btn-warning').click(function () {
         success: function (data) {
             $("#edit").modal("show")
             $('#edit-form').html(data);
-            $("select").select2({
-                dropdownParent: $('#edit'),
-                theme: "bootstrap",
-                matcher: function (params, data) {
-                    // If there are no search terms, return all of the data
-                    if ($.trim(params.term) === '') { return data; }
+                $('.selectpicker').selectpicker('refresh')
 
-                    // Do not display the item if there is no 'text' property
-                    if (typeof data.text === 'undefined') { return null; }
-
-                    // `params.term` is the user's search term
-                    // `data.id` should be checked against
-                    // `data.text` should be checked against
-                    var q = params.term.toLowerCase();
-                    if (data.text.toLowerCase().indexOf(q) > -1 || data.id.toLowerCase().indexOf(q) > -1) {
-                        return $.extend({}, data, true);
-                    }
-
-                    // Return `null` if the term should not be displayed
-                    return null;
-                }
-
-            });
-            ;
-
+       
         }
     });
 
 });
 
 $('.btn-info').click(function () {
-    const id = $(this).data('id');
+    let id = $(this).data('id');
     $.ajax({
         type: "post",
         url: domain + subdomain + edit_proses,
         data: { id: id },
         success: function (data) {
+         
             $("#proses").modal("show")
             $('#proses-form').html(data);
-            $("select").select2({
-                dropdownParent: $('#proses'),
-                theme: "bootstrap",
-                matcher: function (params, data) {
-                    // If there are no search terms, return all of the data
-                    if ($.trim(params.term) === '') { return data; }
+                $('.selectpicker').selectpicker('refresh')
 
-                    // Do not display the item if there is no 'text' property
-                    if (typeof data.text === 'undefined') { return null; }
-
-                    // `params.term` is the user's search term
-                    // `data.id` should be checked against
-                    // `data.text` should be checked against
-                    var q = params.term.toLowerCase();
-                    if (data.text.toLowerCase().indexOf(q) > -1 || data.id.toLowerCase().indexOf(q) > -1) {
-                        return $.extend({}, data, true);
-                    }
-
-                    // Return `null` if the term should not be displayed
-                    return null;
-                }
-
-            });
-            ;
         }
     });
 });
@@ -112,8 +69,8 @@ $('.extras').click(function () {
     // $("input").removeAttr("value");
     // $("textarea").removeAttr("value");
 
-    const id = $(this).data('id');
-    const status = $(this).data('status');
+    let id = $(this).data('id');
+    let status = $(this).data('status');
     $.ajax({
         type: "post",
         url: domain + subdomain + "/edit_extras",
@@ -121,36 +78,14 @@ $('.extras').click(function () {
         success: function (data) {
             $("#extras").modal("show")
             $('#extras-form').html(data);
-            $("select").select2({
-                theme: "bootstrap",
-                dropdownParent: $('#extras'),
-                matcher: function (params, data) {
-                    // If there are no search terms, return all of the data
-                    if ($.trim(params.term) === '') { return data; }
-
-                    // Do not display the item if there is no 'text' property
-                    if (typeof data.text === 'undefined') { return null; }
-
-                    // `params.term` is the user's search term
-                    // `data.id` should be checked against
-                    // `data.text` should be checked against
-                    var q = params.term.toLowerCase();
-                    if (data.text.toLowerCase().indexOf(q) > -1 || data.id.toLowerCase().indexOf(q) > -1) {
-                        return $.extend({}, data, true);
-                    }
-
-                    // Return `null` if the term should not be displayed
-                    return null;
-                }
-
-            });
-
+         
 
             if (status != "sudah") {
                 $("#ex").attr("action", domain + subdomain + "update_" + status)
                 $("#ex").attr("method", "POST")
 
             }
+                $('.selectpicker').selectpicker('refresh')
 
         }
     });
@@ -160,7 +95,7 @@ $('.extras').click(function () {
 
 $('.btn-danger').click(function () {
 
-    const id = $(this).data('id');
+    let id = $(this).data('id');
 
     if (confirm("apakah anda Ingin menghapus data ini ?") === true) {
         window.location.href = domain + subdomain + delete_data + "/" + id;
@@ -183,6 +118,8 @@ $(document).on('change', '[name="provinsi"]', function (e) {
         function (data) {
             // console.log(data);
             $('[name="kabupaten"]').html(data)
+                $('.selectpicker').selectpicker('refresh')
+
         },
     );
 
@@ -202,34 +139,14 @@ $(document).on('change', '[name="kabupaten"]', function (e) {
         function (data) {
             // console.log(data);
             $('[name="kecamatan"]').html(data)
+                $('.selectpicker').selectpicker('refresh')
+
         },
     );
 
 });
 
-$("select").select2({
-    theme: "bootstrap",
-    dropdownParent: $('#tambah'),
-    matcher: function (params, data) {
-        // If there are no search terms, return all of the data
-        if ($.trim(params.term) === '') { return data; }
 
-        // Do not display the item if there is no 'text' property
-        if (typeof data.text === 'undefined') { return null; }
-
-        // `params.term` is the user's search term
-        // `data.id` should be checked against
-        // `data.text` should be checked against
-        var q = params.term.toLowerCase();
-        if (data.text.toLowerCase().indexOf(q) > -1 || data.id.toLowerCase().indexOf(q) > -1) {
-            return $.extend({}, data, true);
-        }
-
-        // Return `null` if the term should not be displayed
-        return null;
-    }
-
-});
 
 $(document).on('change', '[name="kecamatan"]', function (e) {
     $('[name="desa"]').val('');
@@ -241,6 +158,8 @@ $(document).on('change', '[name="kecamatan"]', function (e) {
         function (data) {
             // console.log(data);
             $('[name="desa"]').html(data)
+                $('.selectpicker').selectpicker('refresh')
+
         },
     );
 });
