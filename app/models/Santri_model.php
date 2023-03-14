@@ -91,7 +91,7 @@ class Santri_model
         $ijazah = "";
         $skl = "";
         if (!empty($_FILES['akte']['name'])) {
-            $rand = Security::random(100);
+            $rand = Security::random(107);
             $name = $loc . $rand . ".jpg";
             if (file_exists($loc . $data['akte'] . ".jpg")) {
                 Security::remove_img($data['akte']);
@@ -102,7 +102,7 @@ class Santri_model
         }
 
         if (!empty($_FILES['kk']['name'])) {
-            $rand = Security::random(125);
+            $rand = Security::random(107);
             $name = $loc . $rand . ".jpg";
             if (file_exists($loc . $data['kk'] . ".jpg")) {
                 Security::remove_img($data['kk']);
@@ -113,7 +113,7 @@ class Santri_model
         }
 
         if (!empty($_FILES['ijazah']['name'])) {
-            $rand = Security::random(125);
+            $rand = Security::random(107);
             $name = $loc . $rand . ".jpg";
             if (file_exists($loc.$data['ijazah'].".jpg")) {
                 Security::remove_img($data['ijazah']);
@@ -125,7 +125,7 @@ class Santri_model
         
 
         if (!empty($_FILES['skl']['name'])) {
-            $rand = Security::random(125);
+            $rand = Security::random(107);
             $name = $loc . $rand . ".jpg";
             if (file_exists($loc.$data['skl'].".jpg")) {
                 Security::remove_img($data['skl']);
